@@ -2,13 +2,33 @@ import numpy as np
 from sklearn.cluster import MeanShift
 from sklearn.datasets.samples_generator import make_blobs
 import matplotlib.pyplot as plt
+import csv
 
-centers = [[0,20],[200,20],[400,20],[600,20]]
+start_times = []
+end_times = []
+
+with open('logtime.csv', 'rb') as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+        start_times.append(float(row[0]))
+        end_times.append(float(row[1]))
+
+X = np.array(list(np.array(row) for row in zip(start_times, end_times)))
+
+#print my_array
+#exit(0)
+#centers = [[1,1],[5,5],[9,10]]
 
 # "_" is not labeled.  It is "y"
 #MeanShift is accurate up to 10,000
-X, _ = make_blobs(n_samples = 10, centers = centers, cluster_std = .01)
+#X, _ = make_blobs(n_samples = 200, centers = centers, cluster_std = 2)
 
+#X,_ = [start_times[0]  end_times[0]]
+#X,_ = my_array
+#convert array to nd array
+#use zip function
+
+#plt.scatter(start_times, end_times)
 plt.scatter(X[:,0], X[:,1])
 plt.show()
 
