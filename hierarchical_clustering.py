@@ -9,12 +9,13 @@ start_times = []
 end_times = []
 production = []
 
-with open('logtime.csv', 'rb') as csvfile:
+with open('carwars.csv', 'rb') as csvfile:
     reader = csv.reader(csvfile)
     for row in reader:
         start_times.append(float(row[0]))
         end_times.append(float(row[1]))
         production.append(float(row[2]))
+
 
 X = np.array(list(np.array(row) for row in zip(start_times, end_times, production)))
 
@@ -72,16 +73,19 @@ colors = 10*['r.','g.','b.','c,','k,','y,','m.']
 #plt.show()
 
 
-#for i in range(len(X)):
-#    plt.plot(X[i][0], X[i][1], X[i][2], colors[labels[i]], markersize = 10)
-#plt.show()
 
+
+
+
+
+
+colors= 10*['orange','yellow','black','cyan','magenta','green']
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
 for i in range(len(X)):
-    ax.scatter(X[i][0],X[i][1],X[i][2], colors[labels[i]], marker='o')
-ax.scatter(cluster_centers[:,0], cluster_centers[:,1],cluster_centers[:,2], c='r', marker='o')
+    ax.scatter(X[i][0],X[i][1],X[i][2], color=colors[labels[i]], marker='o')
+ax.scatter(cluster_centers[:,0], cluster_centers[:,1],cluster_centers[:,2], c='r', marker='o',s=50)
 plt.show()
 
 
