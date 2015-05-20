@@ -2,20 +2,23 @@ import numpy as np
 from sklearn.cluster import MeanShift
 from sklearn.datasets.samples_generator import make_blobs
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import csv
 
 start_times = []
 end_times = []
+average = []
 
 with open('logtime.csv', 'rb') as csvfile:
     reader = csv.reader(csvfile)
     for row in reader:
         start_times.append(float(row[0]))
         end_times.append(float(row[1]))
+        average.append(float(row[2]))
 
-X = np.array(list(np.array(row) for row in zip(start_times, end_times)))
+X = np.array(list(np.array(row) for row in zip(start_times, end_times, average)))
 
-#print my_array
+#print X
 #exit(0)
 #centers = [[1,1],[5,5],[9,10]]
 
@@ -29,8 +32,18 @@ X = np.array(list(np.array(row) for row in zip(start_times, end_times)))
 #use zip function
 
 #plt.scatter(start_times, end_times)
-plt.scatter(X[:,0], X[:,1])
+#plt.scatter(X[:,0], X[:,1])
+#plt.scatter(X[:,0], X[:,1], X[:,2])
+
+#plt.show()
+
+
+#3d
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(start_times,end_times,average, c='r', marker='o')
 plt.show()
+exit(0)
 
 ms = MeanShift()
 
@@ -58,8 +71,7 @@ print(labels)
 for i in range(len(X)):
     plt.plot(X[i][0], X[i][1], colors[labels[i]], markersize = 10)
 
-plt.scatter(cluster_centers[:,0], cluster_centers[:,1],
-            marker="x", s=150, linewidths = 5, zorder=10)
+plt.scatter(cluster_centers[:,0], cluster_centers[:,1], marker="o", s=15, linewidths = 5, zorder=10)
 
 plt.show()
 
