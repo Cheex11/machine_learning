@@ -73,12 +73,6 @@ colors = 10*['r.','g.','b.','c,','k,','y,','m.']
 #plt.show()
 
 
-
-
-
-
-
-
 colors= 10*['orange','yellow','black','cyan','magenta','green']
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
